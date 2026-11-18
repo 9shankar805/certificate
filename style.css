@@ -1,0 +1,847 @@
+/* ── Reset & Variables ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --gold: #c8a000;
+  --gold-lt: #daa520;
+  --navy: #0d1b3e;
+  --sb-w: 310px;
+  --ff-sans: 'Inter', sans-serif;
+  --ff-times: 'Times New Roman', 'Tinos', Times, 'Nimbus Roman', serif;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: var(--ff-sans);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background: #0a0f1e;
+  color: #e2e8f0;
+  overflow: hidden;
+}
+
+.app-shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ════ SIDEBAR ════ */
+.sidebar {
+  width: var(--sb-w);
+  min-width: var(--sb-w);
+  background: #111827;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(200, 160, 0, 0.2);
+  transition: width 0.3s, min-width 0.3s;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 0;
+  min-width: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-bottom: 1px solid rgba(200, 160, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--ff-cin);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold-lt);
+}
+
+.sb-toggle {
+  background: rgba(200, 160, 0, 0.15);
+  border: 1px solid rgba(200, 160, 0, 0.3);
+  color: var(--gold-lt);
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.sb-toggle:hover {
+  background: rgba(200, 160, 0, 0.28);
+}
+
+.sidebar-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200, 160, 0, 0.25) transparent;
+}
+
+.sidebar-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-body::-webkit-scrollbar-thumb {
+  background: rgba(200, 160, 0, 0.25);
+  border-radius: 2px;
+}
+
+.sc {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(200, 160, 0, 0.13);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sc-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(200, 160, 0, 0.18);
+}
+
+.lbl {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 7px;
+  margin-bottom: 3px;
+}
+
+.inp {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 7px;
+  padding: 8px 11px;
+  color: #e2e8f0;
+  font-size: 13px;
+  font-family: var(--ff-sans);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.inp:focus {
+  border-color: rgba(200, 160, 0, 0.5);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.inp::placeholder {
+  color: #475569;
+}
+
+.upbox {
+  border: 2px dashed rgba(200, 160, 0, 0.35);
+  border-radius: 9px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(200, 160, 0, 0.04);
+  transition: all 0.22s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.upbox:hover {
+  border-color: var(--gold);
+  background: rgba(200, 160, 0, 0.1);
+}
+
+.upbox.active {
+  border-style: solid;
+  border-color: rgba(200, 160, 0, 0.6);
+}
+
+.up-icon {
+  font-size: 20px;
+}
+
+.up-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: #cbd5e1;
+}
+
+.up-hint {
+  font-size: 10px;
+  color: #64748b;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #c8a000, #daa520);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  font-family: var(--ff-sans);
+  transition: all 0.2s;
+}
+
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 18px rgba(200, 160, 0, 0.35);
+}
+
+.btn-outline {
+  background: rgba(200, 160, 0, 0.08);
+  color: var(--gold-lt);
+  border: 1px solid rgba(200, 160, 0, 0.38);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  font-family: var(--ff-sans);
+  transition: all 0.2s;
+}
+
+.btn-outline:hover {
+  background: rgba(200, 160, 0, 0.2);
+  border-color: var(--gold);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.07);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  font-family: var(--ff-sans);
+  transition: all 0.2s;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(200, 160, 0, 0.3);
+}
+
+.action-sc {
+  gap: 9px;
+}
+
+/* ════ PREVIEW ════ */
+.preview-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.preview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  flex-shrink: 0;
+}
+
+.preview-bar h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.zoom-ctrls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.zbtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e2e8f0;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: var(--ff-sans);
+}
+
+.zbtn:hover {
+  background: rgba(200, 160, 0, 0.2);
+}
+
+.zbtn-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #cbd5e1;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: var(--ff-sans);
+  letter-spacing: 0.5px;
+}
+
+.zbtn-pill:hover,
+.zbtn-pill.active {
+  background: linear-gradient(135deg, #c8a000, #daa520);
+  border-color: #daa520;
+  color: #000;
+  box-shadow: 0 2px 8px rgba(200, 160, 0, 0.3);
+}
+
+#zoomLbl {
+  font-size: 12px;
+  color: #94a3b8;
+  min-width: 38px;
+  text-align: center;
+}
+
+.preview-scroll {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: safe center;
+  padding: 0;
+  background: radial-gradient(ellipse at center, #1e293b 0%, #0a0f1e 100%);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200, 160, 0, 0.18) transparent;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.preview-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.preview-scroll::-webkit-scrollbar-thumb {
+  background: rgba(200, 160, 0, 0.2);
+  border-radius: 3px;
+}
+
+/* Wrapper for certificate: width and height dynamically match scaled certificate size */
+.cert-stage {
+  position: relative;
+  display: block;
+  margin: 30px auto 50px auto;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════
+   CERTIFICATE  794 × 1123 px
+   BG image: 1051×1496 px   scale_x=0.7555  scale_y=0.7507
+
+   KEY BG LAYOUT (scaled to display coords):
+   ─ Header section (school name, ornaments) ends at display y≈229px
+   ─ Clear cream space: y=229px onwards (left side after logo)
+   ─ Address area: y=248-278px (to right of logo)
+   ─ Serial No area: y=330-355px (left side)
+   ─ Banner (navy) top: y=491px  bottom: y=545px
+   ─ Body text starts: y=558px
+   ─ Footer area: bottom ~50px
+══════════════════════════════════════════════════ */
+.cert-outer {
+  width: 794px;
+  height: 1123px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  background: #ffffff;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+
+.cert-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Logo: circle at bg(44,84)→(214,254) display coords */
+.cert-logo-img {
+  position: absolute;
+  top: 84px;
+  left: 44px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: contain;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Photo: inner photo rectangle at display x=589-732, y=310-510 */
+.cert-photo-img {
+  position: absolute;
+  top: 310px;
+  right: 62px;
+  width: 143px;
+  height: 200px;
+  object-fit: cover;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.ol {
+  position: absolute;
+  z-index: 4;
+}
+
+/* ─── TOP RIGHT: school code + Email ───
+   Positioned in the cream area, clear of decorative border.
+   Pure solid black, EB Garamond 700.
+   School code NON-italic bold, Email ITALIC bold (matches reference).
+*/
+.ol-topright {
+  top: 18px;
+  right: 95px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.tl-code {
+  font-family: var(--ff-gara);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  line-height: 1.4;
+}
+
+.tl-code .tl-lbl {
+  font-style: normal;
+  font-weight: 700;
+}
+
+.tl-code .tl-num {
+  font-style: normal;
+  font-weight: 700;
+}
+
+.tl-email {
+  font-family: var(--ff-gara);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  line-height: 1.4;
+}
+
+/* ─── ADDRESS ───
+   Centered horizontally below the "GENESIS GLOBAL SCHOOL" header ornament.
+   EB Garamond bold italic, pure black.
+*/
+.ol-address {
+  top: 294px;
+  left: 250px;
+  right: 75px;
+  font-family: var(--ff-gara);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000;
+  line-height: 1.55;
+  text-align: center;
+}
+
+/* ─── S. NO. ───
+   Horizontally aligned with the left margin; vertically aligned with photo frame.
+   EB Garamond bold normal (NON-italic), pure black.
+*/
+.ol-serial {
+  top: 368px;
+  left: 50px;
+  font-family: var(--ff-gara);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000;
+}
+
+/* ─── BODY ───
+   Starts immediately below the bottom golden curl of the Character Certificate banner.
+   Balanced L/R margins (no excess right whitespace).
+*/
+.ol-body {
+  top: 610px;
+  left: 52px;
+  right: 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* "TO WHOM IT MAY CONCERN" — Cinzel all-caps black heading */
+.body-concern {
+  font-family: var(--ff-cin);
+  font-size: 17px;
+  font-weight: 900;
+  text-align: center;
+  color: #000;
+  letter-spacing: 1.2px;
+  margin-bottom: 3px;
+  font-style: normal;
+}
+
+/* Body paragraphs — EB Garamond bold italic, pure black. No text-indent. */
+.body-para {
+  font-family: var(--ff-gara);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: #000;
+  text-align: left;
+}
+
+/* Highlighted names — SAME italic bold weight as surrounding body (no extra bold) */
+.hl {
+  font-family: var(--ff-gara);
+  font-style: italic;
+  font-weight: 700;
+  color: #000;
+}
+
+/* Detail list — EB Garamond bold italic, pure black. Matches reference (slanted). */
+.body-details {
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.body-details p {
+  font-family: var(--ff-gara);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #000;
+}
+
+/* ─── FOOTER ───
+   3 columns:
+   Left:  Date value "01/06/2026" + "Date of Issue" label (NON-italic bold)
+   Mid:   Signature dots line + "Prepared by" label (NON-italic bold)
+   Right: Signature dots line + "Principal" label (NON-italic bold)
+   All EB Garamond 700, pure black.
+*/
+.ol-footer {
+  position: absolute;
+  bottom: 48px;
+  left: 85px;
+  right: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.fc {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.fc-start {
+  align-items: center;
+}
+
+.fc-mid {
+  align-items: center;
+}
+
+.fc-end {
+  align-items: center;
+}
+
+.fc-dots {
+  font-family: var(--ff-gara);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  color: #000;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.fc-lbl {
+  font-family: var(--ff-gara);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  color: #000;
+  line-height: 1.2;
+}
+
+.fc-date {
+  font-family: var(--ff-gara);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  color: #000;
+  line-height: 1;
+  padding-bottom: 1px;
+}
+
+/* ════ MOBILE RESPONSIVE (≤ 768px) ════ */
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .mobile-nav {
+    display: flex;
+    background: #111827;
+    border-bottom: 1px solid rgba(200, 160, 0, 0.25);
+    padding: 8px 10px;
+    gap: 8px;
+    flex-shrink: 0;
+    z-index: 50;
+  }
+
+  .mn-btn {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-family: var(--ff-sans);
+  }
+
+  .mn-btn.active {
+    background: linear-gradient(135deg, #c8a000, #daa520);
+    color: #000;
+    border-color: #daa520;
+    box-shadow: 0 3px 12px rgba(200, 160, 0, 0.35);
+  }
+
+  .sidebar {
+    width: 100% !important;
+    min-width: 100% !important;
+    flex: 1;
+    border-right: none;
+    border-bottom: none;
+    display: flex;
+  }
+
+  .sidebar.mobile-hidden {
+    display: none !important;
+  }
+
+  .sidebar-header {
+    display: none;
+  }
+
+  .preview-wrap {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .preview-wrap.mobile-hidden {
+    display: none !important;
+  }
+
+  .preview-bar {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  .preview-bar h2 {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .zoom-ctrls {
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .zbtn {
+    width: 26px;
+    height: 26px;
+    font-size: 14px;
+  }
+
+  .zbtn-pill {
+    height: 26px;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+
+  #zoomLbl {
+    font-size: 11px;
+    min-width: 30px;
+  }
+
+  .preview-scroll {
+    padding: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cert-stage {
+    margin: 16px auto 36px auto;
+  }
+
+  .inp,
+  .fgroup input,
+  .fgroup select,
+  .fgroup textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ════ PRINT ════ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-sizing: border-box !important;
+  }
+
+  html,
+  body {
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    overflow: hidden !important;
+  }
+
+  .app-shell,
+  .preview-wrap,
+  .preview-scroll,
+  .cert-stage {
+    display: block !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+  }
+
+  .sidebar,
+  .preview-bar {
+    display: none !important;
+  }
+
+  .cert-outer {
+    width: 210mm !important;
+    height: 297mm !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .cert-bg-img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: fill !important;
+    z-index: 1 !important;
+  }
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificate Generator - Genesis Global School</title>
+  <meta name="description" content="Create and print character certificates for Genesis Global School." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- Mobile Tab Switcher (only visible on mobile/tablet screens) -->
+    <nav class="mobile-nav" id="mobileNav">
+      <button class="mn-btn active" id="tabEditor">&#9998; Edit Details</button>
+      <button class="mn-btn" id="tabPreview">&#128065; View Certificate</button>
+    </nav>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+            <rect width="26" height="26" rx="7" fill="url(#g1)" />
+            <path d="M13 5l2.2 4.5 5 .73-3.6 3.51.85 4.96L13 16.25l-4.45 2.45.85-4.96L5.8 10.23l5-.73L13 5z"
+              fill="#fff" />
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#b8860b" />
+                <stop offset="1" stop-color="#daa520" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>CertifyPro</span>
+        </div>
+        <button class="sb-toggle" id="sidebarToggle">&#9776;</button>
+      </div>
+      <div class="sidebar-body">
+
+        <div class="sc">
+          <div class="sc-title">&#127983; School Info</div>
+          <label class="lbl" for="schoolCode">School Code</label>
+          <input id="schoolCode" class="inp" type="text" value="16046" />
+          <label class="lbl" for="schoolEmail">Email</label>
+          <input id="schoolEmail" class="inp" type="text" value="genesisglobalschool945@gmail.com" />
+          <label class="lbl" for="schoolAddress">Address Line 1</label>
+          <input id="schoolAddress" class="inp" type="text" value="Siraha Municipality-07,Siraha" />
+          <label class="lbl" for="schoolAddress2">Address Line 2</label>
+          <input id="schoolAddress2" class="inp" type="text" value="Madhesh Province, NEPAL" />
+        </div>
+
+        <div class="sc">
+          <div class="sc-title">&#128444; Images</div>
+          <label class="lbl">Background Image</label>
+          <div class="upbox" id="bgBox" onclick="document.getElementById('bgFile').click()">
+            <div class="up-icon">&#127912;</div>
+            <div class="up-text" id="bgText">certificate_bg.png (active)</div>
+            <div class="up-hint">Click to replace background</div>
+          </div>
+          <input id="bgFile" type="file" accept="image/*" style="display:none" />
+          <button class="btn-ghost" id="resetBg" style="margin-top:6px">&#8617; Reset Default</button>
+
+          <label class="lbl" style="margin-top:12px">School Logo</label>
+          <div class="upbox" id="logoBox" onclick="document.getElementById('logoFile').click()">
+            <div class="up-icon">&#127981;</div>
+            <div class="up-text" id="logoText">Upload logo PNG</div>
+            <div class="up-hint">Goes over logo circle in background</div>
+          </div>
+          <input id="logoFile" type="file" accept="image/*" style="display:none" />
+
+          <label class="lbl" style="margin-top:12px">Student Photo</label>
+          <div class="upbox" id="photoBox" onclick="document.getElementById('photoFile').click()">
+            <div class="up-icon">&#128100;</div>
+            <div class="up-text" id="photoText">Upload student photo</div>
+            <div class="up-hint">Goes in the photo box</div>
+          </div>
+          <input id="photoFile" type="file" accept="image/*" style="display:none" />
+        </div>
+
+        <div class="sc">
+          <div class="sc-title">&#127891; Student Details</div>
+          <label class="lbl" for="serialNo">S. No.</label>
+          <input id="serialNo" class="inp" type="text" placeholder="e.g. 001" />
+          <label class="lbl" for="studentName">Student Name</label>
+          <input id="studentName" class="inp" type="text" value="MANISH LAL KARN" />
+          <label class="lbl" for="fatherName">Father's Name</label>
+          <input id="fatherName" class="inp" type="text" value="DIPENDRA LAL KARN" />
+          <label class="lbl" for="motherName">Mother's Name</label>
+          <input id="motherName" class="inp" type="text" value="SABITRI KUMARI KARN" />
+          <label class="lbl" for="gpa">GPA (CGPA)</label>
+          <input id="gpa" class="inp" type="text" value="3.12" />
+          <label class="lbl" for="yearBS">Year B.S.</label>
+          <input id="yearBS" class="inp" type="text" value="2082 B.S." />
+          <label class="lbl" for="yearAD">Year AD</label>
+          <input id="yearAD" class="inp" type="text" value="2026 AD" />
+          <label class="lbl" for="dobBS">Date of Birth B.S.</label>
+          <input id="dobBS" class="inp" type="text" value="2065/10/28 B.S." />
+          <label class="lbl" for="dobAD">Date of Birth AD</label>
+          <input id="dobAD" class="inp" type="text" value="2009/02/10 AD" />
+          <label class="lbl" for="seeReg">SEE Registration No.</label>
+          <input id="seeReg" class="inp" type="text" value="822160460002" />
+          <label class="lbl" for="seeSymbol">SEE Symbol No.</label>
+          <input id="seeSymbol" class="inp" type="text" value="01604204 D" />
+          <label class="lbl" for="studentAddr">Student Address</label>
+          <input id="studentAddr" class="inp" type="text" value="SIRAHA - 13 SIRAHA" />
+        </div>
+
+        <div class="sc">
+          <div class="sc-title">&#9998; Footer</div>
+          <label class="lbl" for="issueDate">Date of Issue</label>
+          <input id="issueDate" class="inp" type="text" value="01/06/2026" />
+          <label class="lbl" for="preparedBy">Middle Label</label>
+          <input id="preparedBy" class="inp" type="text" value="Prepared by" />
+          <label class="lbl" for="principalLbl">Right Label</label>
+          <input id="principalLbl" class="inp" type="text" value="Principal" />
+        </div>
+
+        <div class="sc action-sc">
+          <button class="btn-gold" id="downloadPdfBtn">&#128190; Download PDF</button>
+          <button class="btn-outline" id="printBtn">&#128424; Print Certificate</button>
+          <button class="btn-ghost" id="updateBtn">&#8635; Refresh Preview</button>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ===== PREVIEW ===== -->
+    <main class="preview-wrap">
+      <div class="preview-bar">
+        <h2>Certificate Preview</h2>
+        <div class="zoom-ctrls">
+          <button class="zbtn" id="zoomOut" title="Zoom Out">&#8722;</button>
+          <span id="zoomLbl">100%</span>
+          <button class="zbtn" id="zoomIn" title="Zoom In">+</button>
+          <button class="zbtn-pill" id="fitBtn" title="Fit to Screen">Fit</button>
+          <button class="zbtn-pill active" id="actualBtn" title="100% Full Readable Size">100%</button>
+        </div>
+      </div>
+
+      <div class="preview-scroll" id="previewScroll">
+        <div class="cert-stage">
+          <div class="cert-outer" id="certOuter">
+
+            <!-- Layer 1: Background (has school name, logo, ornaments, banner baked in) -->
+            <img class="cert-bg-img" id="certBgImg" src="assets/certificate_bg.png" alt="Certificate Background" />
+
+            <!-- Layer 2: Logo overlay over circular logo area -->
+            <img class="cert-logo-img" id="certLogoImg" src="" alt="School Logo" style="display:none" />
+
+            <!-- Layer 3: Student photo over photo box -->
+            <img class="cert-photo-img" id="certPhotoImg" src="" alt="Student Photo" style="display:none" />
+
+            <!-- Layer 4: Text overlays only for EDITABLE content -->
+
+            <!-- Top-right: code + email -->
+            <div class="ol ol-topright">
+              <div class="tl-code"><span class="tl-lbl">School code:</span> <span class="tl-num"
+                  id="o-code">16046</span></div>
+              <div class="tl-email">&#9993; Email: <span id="o-email">genesisglobalschool945@gmail.com</span></div>
+            </div>
+
+            <!-- Address: below tagline, left of photo box — NO italic (matches ref) -->
+            <div class="ol ol-address">
+              <span id="o-addr1">Siraha Municipality-07,Siraha</span><br>
+              <span id="o-addr2">Madhesh Province, NEPAL</span>
+            </div>
+
+            <!-- S. No. -->
+            <div class="ol ol-serial">S. No. : <span id="o-serial">....................</span></div>
+
+            <!-- Body content (below the Character Certificate banner) -->
+            <div class="ol ol-body">
+
+              <p class="body-concern">TO WHOM IT MAY CONCERN</p>
+
+              <p class="body-para">
+                It is hereby certified that Mr.<span class="hl" id="o-stuname">MANISH LAL KARN</span> , son
+                of Mr. <span class="hl" id="o-dadname">DIPENDRA LAL KARN</span> , a bonafide and enthusiastic student
+                of this school with the following details has duly passed the Secondary Education
+                Examination (SEE) conducted by the National Examination Board (NEB), Nepal
+                with GPA (CGPA <span class="hl" id="o-gpa">3.12</span>) held in the year <span class="hl"
+                  id="o-year">2082 B.S. (2026 AD)</span>.
+              </p>
+
+              <p class="body-para">
+                He/She was a devoted student and conducted himself/herself at the school
+                in a dignified manner.
+              </p>
+
+              <p class="body-para">
+                To the best of our knowledge and belief, he/she bears a good moral character and
+                did not participate in any activity subversive of school's rules and regulations.
+                He/She steps out of this school leaving behind cherishable memories of pleasant
+                associations and experiences, with our blessings for a bright and prosperous
+                career ahead.
+              </p>
+
+              <div class="body-details">
+                <p>Date of Birth : <span id="o-dobbs">2065/10/28 B.S.</span> (<span id="o-dobad">2009/02/10 AD</span>)
+                </p>
+                <p>SEE Registration No : <span id="o-seereg">822160460002</span>.</p>
+                <p>SEE Symbol No : <span id="o-seesym">01604204 D</span>.</p>
+                <p>Mother's Name : <span id="o-mom">SABITRI KUMARI KARN</span>.</p>
+                <p>Address : <span id="o-stuaddr">SIRAHA - 13 SIRAHA</span>.</p>
+              </div>
+            </div>
+
+            <!-- Footer (3 columns):
+                 Left:  Date value → Date of Issue label
+                 Mid:   Signature dots → Prepared by label
+                 Right: Signature dots → Principal label -->
+            <div class="ol ol-footer">
+              <div class="fc fc-start">
+                <p class="fc-date" id="o-date">01/06/2026</p>
+                <p class="fc-lbl">Date of Issue</p>
+              </div>
+              <div class="fc fc-mid">
+                <p class="fc-dots">................</p>
+                <p class="fc-lbl" id="o-prepby">Prepared by</p>
+              </div>
+              <div class="fc fc-end">
+                <p class="fc-dots">................</p>
+                <p class="fc-lbl" id="o-prinlbl">Principal</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+  <script src="assets/html2canvas.min.js"></script>
+  <script src="assets/jspdf.umd.min.js"></script>
+  <script src="assets/html2pdf.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

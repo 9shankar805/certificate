@@ -1,0 +1,12 @@
+{
+  "name": "certificate-generator",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'Static site ready'"
+  },
+  "dependencies": {
+    "html2pdf.js": "^0.14.0"
+  }
+}
